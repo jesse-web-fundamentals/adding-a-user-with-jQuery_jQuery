@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script type="text/javascript" src="lib/jquery.min.js"></script>
+  <title>Adding A User</title>
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+      function append_data(data) {
+        console.log('append_data function runnning')
+
+        $('table').append('<tr> \
+          <td>'+ data[0].value + '</td> \
+          <td>'+ data[1].value + '</td> \
+          <td>'+ data[2].value + '</td> \
+          <td>'+ data[3].value + '</td> \
+          </tr>'
+        )
+      }
+
+      $('#contact_form').append(
+        '<h1>Add User</h1> \
+        <form id="person_form" action="process.php" method="post"> \
+        First Name: <input type="text" name="first_name" placeholder="First Name"/> \
+        Last Name: <input type="text" name="last_name"placeholder="Last Name" /> \
+        Email Address: <input type="email" name="email" placeholder="email"/> \
+        Contact #: <input type="text" name="contact_number" placeholder="Contact #" /> \
+        <input type="submit" value="Add User" /> \
+        </form>'
+      );
+
+      $("form").on('submit', function(event) {
+        event.preventDefault();
+        console.log($(this))
+        console.log($(this).serializeArray());
+        var data = $(this).serializeArray();
+        console.log(data[0].value)
+        append_data(data);
+      })
+
+
+    });
+  </script>
+</head>
+<body>
+  <table>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email Address</th>
+      <th>Contact #</th>
+    </tr>
+
+  </table>
+  <div id="contact_form"></div>
+</body>
+</html>
